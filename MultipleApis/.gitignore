@@ -1,0 +1,22 @@
+# Compiled class file
+target/
+# Compiled JAR files
+*.jar
+# Logs
+logs/
+# IntelliJ IDEA
+.idea/
+# Eclipse
+.classpath
+.project
+.settings/
+# Gradle
+build/
+# Maven
+target/
+# Spring Boot
+*.log
+logs/
+*.iml
+.idea/
+target/
