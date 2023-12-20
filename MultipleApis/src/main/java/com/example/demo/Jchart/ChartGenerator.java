@@ -1,7 +1,7 @@
 package com.example.demo.Jchart;
 
 import com.example.demo.ApacheDatabase.DatabaseConnectivity;
-import com.example.demo.ExcelSheetReader.ExcelReader;
+import com.example.demo.ExcelSheetReader.DataReader;
 import com.example.demo.Model.Employee;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -15,18 +15,15 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-;
-
 public class ChartGenerator {
-
     static public void main(String[] args) {
-        DatabaseConnectivity database = new DatabaseConnectivity();
-        ExcelReader excelReader = new ExcelReader();
+        DatabaseConnectivity db = new DatabaseConnectivity();
+        DataReader excelReader = new DataReader();
 
-        List<Employee> Employees = excelReader.getEmployeeList();
+        List<Employee> emps = excelReader.getEmployeeList();
 
-        DatabaseConnectivity.Insertion(Employees);
-        generateCharts(Employees);
+        DatabaseConnectivity.Insertion(emps);
+        generateCharts(emps);
     }
 private static void generateCharts(List<Employee> employees) {
     String pdfPath = "Output.pdf";
@@ -36,11 +33,10 @@ private static void generateCharts(List<Employee> employees) {
          PdfDocument pdfDocument = new PdfDocument(writer);
          Document document = new Document(pdfDocument)) {
 
-        addChartToDocument(DatabaseConnectivity.findMaxInterview(), document);
-        addChartToDocument(DatabaseConnectivity.findMinInterview(), document);
-        addChartToDocument(DatabaseConnectivity.viewTop3Skill(), document);
-        addChartToDocument(DatabaseConnectivity.viewTop3SkillsInPeakTime(), document);
-        addChartToDocument(DatabaseConnectivity.getTop3Panels(employees), document);
+        addChartToDocument(DatabaseConnectivity.maximumInterviews(), document);
+        addChartToDocument(DatabaseConnectivity.minimumInterviews(), document);
+        addChartToDocument(DatabaseConnectivity.findTopThreeSkills(), document);
+        addChartToDocument(DatabaseConnectivity.peakTimeTopThreeSkills(), document);
 
         System.out.println("PDF Path: " + pdfPath);
     } catch (Exception e) {
